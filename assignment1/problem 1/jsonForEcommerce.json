@@ -1,0 +1,60 @@
+{
+  "Electronics":[{
+
+  	    "mobile":[
+  	    	       {
+		           "id": 1, //number
+		           "name":"lenovo k4 note",   // String
+		           "os"   :"android",         //string
+		            "company":"Lenovo",       //string
+		           "price": 10000,            // number
+		           "availability": true,      // boolean
+		           "numberOfItemRemaining": 4, //number
+		           "discountAvailable": true,  // boolean
+		           "discountInPercentage": 10,// number
+		           "EMI":1000,                // number
+		           "warrantyInYears": 1,      // number
+		           "properties":[{            // object
+		           	                "camera":[{  "front":5,    // object
+			                                   "back": 13
+                               
+                                               }],
+                                    "battery" : 3300,        // number
+                                    "color"  :["black","silver","white"],  // array
+                                    "memoryInGB": 64, // number 
+                                    "ramInGB" : 4, // number
+                                    "screenSizeInInch": 5.5, //number
+                                    "weightInGram": 181      // number
+                                 }],
+	              },
+	              {
+		           "id": 2,       // number
+		           "name":"lenovo k8 note",
+		           "os"   :"android", 
+		            "company":"Lenovo",
+		           "price": 12000,
+		           "availability": true,
+		           "numberOfItemRemaining": 50,
+		           "discountAvailable": false,
+		           "discountInPercentage": 0,
+		           "EMI":1000,
+		           "warrantyInYears": 1,
+		           "properties":[{ 
+		           	                "camera":[{  "front":5,
+			                                   "back": 13
+                               
+                                               }],
+                                    "battery" : 4000,
+                                    "color"  :["black","silver","white"],
+                                    "memoryInGB": 64, // number 
+                                    "ramInGB" : 4, // number
+                                    "screenSizeInInch": 5.5, //number
+                                    "weightInGram": 181      // number        
+                                 }],
+	              }
+	
+     ]
+	
+   }]
+}
+

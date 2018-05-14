@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> </title>
+</head>
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="script.js"></script>
+<body>
+  <h1>Assignment 2</h1>
+  <div class="container" id="container">
+  	<p>
+  		Before proceeding forword please add this extension in chrome browser.<br> Otherwise there will be an error to access json data.<br>To add extension
+      <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en-US" target="_blank">Click here</a>
+  	</p>
+  <p id="para">Enter 1 to get episode detail from season and episode number.<br><br>
+     Enter 2 to get episode details using episode id. You can enter multiple ids and this ids should be comma separated.<br><br>
+     Enter 3 to search episode by its name.<br></p>
+  <input type="number" name="input" id="input">
+  <button type="button" id="button" onclick="takeInput()">Continue</button>
+  </div>
+  <div id="heading"></div>
+  <div id="result"></div>
+</body>
+</html>
