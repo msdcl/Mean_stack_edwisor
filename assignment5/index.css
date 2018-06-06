@@ -1,0 +1,23 @@
+:root{
+    font-size: 20px;
+}
+
+body{
+    background-color: black;
+}
+.container{
+    background-color: aliceblue;
+    height: 100vh;
+}
+.heading{
+    position: relative;
+    padding-left: 30%;
+    padding-top: 5%;
+    padding-right: 30%;
+    font-size: 1.5rem;
+    
+}
+.component{
+      padding-left: 30%;
+      padding-right: 10%;
+}
