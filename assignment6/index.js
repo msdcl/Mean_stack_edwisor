@@ -49,6 +49,7 @@ let getMovieData = () => {
     if(input=='' || input==undefined || input==null){
         alert("Please enter valid input");
     }else{
+        input = input.trim();
         $.ajax({
             type: 'Get',
             dataType: 'json',
