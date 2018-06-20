@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row option">Select your option to get information :
+        <select class="selectOpt" [(ngModel)]="selectedOption" #i="ngModel" name="selectedOption" (change)="selectChangeHandler($event.target.value)">
+          <option class="optionc" *ngFor="let i of category"  [value]="i">{{i}}</option>
+        </select>
+      </div>
+      <div class="row" *ngIf="allData?.length > 0">
+        <div *ngFor="let data of allData; let i=index" class="col-sm-12 ">
+          
+          <div *ngIf="house" class="card house text-white bg-info mb-3" style="max-width: 70rem;">
+            <div class="card-header">
+              <b>Name</b> : {{data.name}}</div>
+            <div class="card-body">
+    
+              <p class="card-text">
+                <b>Region</b> : {{data.region}}
+                <br>
+                <b>CoatOfArms</b> : {{data.coatOfArms}}
+              </p>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-info" [routerLink]="['/view2','houses',i+1]" >Details</button>
+            </div>
+          </div>
+    
+          <div *ngIf="character" class="card character text-white bg-info mb-3" style="max-width: 70rem;">
+            <div class="card-header">
+              <b>Name</b> : {{data.name}}</div>
+            <div class="card-body">
+    
+              <p class="card-text">
+                <b>Gender</b> : {{data.gender}}
+                <br>
+                <b>Culture</b> : {{data.culture}}
+              </p>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-info" [routerLink]="['/view2','characters',i+1]" >Details</button>
+            </div>
+          </div>
+    
+          <div *ngIf="book" class="card book text-white bg-info mb-3" style="max-width: 70rem;">
+            <div class="card-header">
+              <b>Name</b> : {{data.name}}</div>
+            <div class="card-body">
+              <p class="card-text">
+                <b>Authors</b> : {{data.authors}}
+                <br>
+                <b>Publisher</b> : {{data.publisher}}
+                <br>
+                <b>Released</b> : {{data.released | date}}
+                <br>
+                <b>Country</b> : {{data.country}}
+              </p>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-info" [routerLink]="['/view2','books',i+1]">Details</button>
+            </div>
+          </div>
+    
+    
+        </div>
+      </div>
+</div>

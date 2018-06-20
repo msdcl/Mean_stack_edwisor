@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+.row{
+    height: auto;
+    color: antiquewhite;
+    margin-top: 20px;
+   
+}
+.container{
+    /* background-color:  #F9CF00; */
+    border: 6px solid rgb(12, 12, 12);
+    height: auto;
+}
+

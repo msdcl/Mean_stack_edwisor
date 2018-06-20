@@ -1,0 +1,24 @@
+.selectOpt{
+    color: black;
+    font-size: 3vw;
+}
+.option{
+    background-color: #F19F4D;
+    font-size: 4.5vw;
+    padding-left: 2%;
+}
+.card{
+    padding-left: 2%;
+    margin-top: 3%;
+    color:black;
+    margin-bottom: 3%;
+}
+.character{
+border: 2px solid red;
+}
+.book{
+    border: 2px solid blue;
+}
+.house{
+    border: 2px solid green;
+}

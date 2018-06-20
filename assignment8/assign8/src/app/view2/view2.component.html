@@ -1,0 +1,171 @@
+<div class="container">
+  <div class="row" *ngIf="currentData">
+    <div *ngIf='book' class="card book text-white bg-info mb-3" style="max-width: 100rem;">
+      <div class="card-header">
+        <b>Url</b> : {{currentData.url}}</div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <b>Name</b> : {{currentData.name}}</h5>
+        <p class="card-text">
+          <b>isbn</b> : {{currentData.isbn}}
+          <br>
+          <b>Authors</b> : {{currentData.authors}}
+          <br>
+          <b>NumberOfPages</b> : {{currentData.numberOfPages}}
+          <br>
+          <b>Publisher</b> : {{currentData.publisher}}
+          <br>
+          <b>Country</b> : {{currentData.country}}
+          <br>
+          <b>MediaType</b> : {{currentData.mediaType}}
+          <br>
+          <b>Released</b> : {{currentData.released | date}}
+          <br>
+          <b>Character's urls </b> :
+          <br>
+          <span class="urls" *ngFor="let urls of currentData.characters; let last=last">
+            {{urls}}{{last?'':','}}
+            <br>
+          </span>
+          <b>PovCharacters's urls </b> :
+          <br>
+          <span class="urls" *ngFor="let urls of currentData.povCharacters; let last=last">
+            {{urls}}{{last?'':','}}
+            <br>
+          </span>
+        </p>
+
+      </div>
+      <div class="card-footer">
+          <button type="button" class="btn btn-info" (click)="goBackFunction()">go back</button>
+      </div>
+    </div>
+    <div *ngIf='character' class="card character text-white bg-info mb-3" style="max-width: 100rem;">
+      <div class="card-header">
+        <b>Url</b> : {{currentData.url}}</div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <b>Name</b> : {{currentData.name}}</h5>
+        <p class="card-text">
+          <b>Gender</b> : {{currentData.gender}}
+          <br>
+          <b>Culture</b> : {{currentData.culture}}
+          <br>
+          <b>Born</b> : {{currentData.born}}
+          <br>
+          <b>Died</b> : {{currentData.died}}
+          <br>
+          <b>Titles</b> :<br>
+          <span class="urls" *ngFor="let title of currentData.titles; let last=last">
+            {{title}}{{last?'':','}}
+            <br>
+          </span>
+          <br>
+          <b>Aliases</b> : <br>
+          <span class="title" *ngFor="let title of currentData.aliases; let last=last"> 
+            {{title}}{{last?'':','}}
+          <br>
+          </span>
+          <br>
+          <b>Father</b> : {{currentData.father}}
+          <br>
+          <b>Mother</b> : {{currentData.mother}}
+          <br>
+          <b>Spouse</b> : {{currentData.spouse}}
+          <br>
+          <b>Allegiances</b> :
+          <br>
+          <span class="urls" *ngFor="let urls of currentData.allegiances; let last=last">
+            {{urls}}{{last?'':','}}
+            <br>
+          </span><br>
+          <b>Books's urls for character</b> :
+          <br>
+          <span class="urls" *ngFor="let urls of currentData.books; let last=last">
+            {{urls}}{{last?'':','}}
+            <br>
+          </span><br>
+          <b>Povbooks's urls for character</b> :<br>
+          <span class="urls" *ngFor="let urls of currentData.povBooks; let last=last">
+              {{urls}}{{last?'':','}}
+              <br>
+            </span><br>
+            <b>TvSeries</b> :<br>
+          <span class="urls" *ngFor="let urls of currentData.tvSeries; let last=last">
+              {{urls}}{{last?'':','}}
+              <br>
+            </span><br>
+            <b>PlayedBy</b> :
+            <span class="urls" *ngFor="let urls of currentData.playedBy; let last=last">
+                {{urls}}{{last?'':','}}
+                <br>
+              </span>
+        </p>
+
+      </div>
+      <div class="card-footer">
+          <button type="button" class="btn btn-info" (click)="goBackFunction()">go back</button>
+      </div>
+    </div>
+    <div *ngIf='house' class="card house text-white bg-info mb-3" style="max-width: 100rem;">
+      <div class="card-header">
+        <b>Url</b> : {{currentData.url}}</div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <b>Name</b> : {{currentData.name}}</h5>
+        <p class="card-text">
+          <b>Region</b> : {{currentData.region}}
+          <br>
+          <b>CoatOfArms</b> : {{currentData.coatOfArms}}
+          <br>
+          <b>Words</b> : {{currentData.words}}
+          <br>
+          <b>Titles</b> :<br>
+          <span class="urls" *ngFor="let title of currentData.titles; let last=last">
+            {{title}}{{last?'':','}}
+            <br>
+          </span>
+          <br>
+          <b>Seats</b> :<br>
+          <span class="urls" *ngFor="let seat of currentData.seats; let last=last">
+            {{seat}}{{last?'':','}}
+            <br>
+          </span>
+          <br>
+          <b>CurrentLord</b> : {{currentData.currentLord}}
+          <br>
+          <b>Heir</b> : {{currentData.heir}}
+          <br>
+          <b>OverLord</b> : {{currentData.overLord}}
+          <br>
+          <b>Founded</b> : {{currentData.founded}}
+          <br>
+          <b>Founder</b> : {{currentData.founder}}
+          <br>
+          <b>DiedOut</b> : {{currentData.diedOut}}
+          <br>
+          <b>AncestralWeapons </b> : <br>
+          <span class="urls" *ngFor="let weapon of currentData.ancestralWeapons; let last=last">
+            {{weapon}}{{last?'':','}}
+            <br>
+          </span>
+          <b>CadetBranches </b> :<br>
+          <span class="urls" *ngFor="let branch of currentData.cadetBranches; let last=last">
+            {{branch}}{{last?'':','}}
+            <br>
+          </span>
+          <br>
+          <b>SwornMembers</b>:<br>
+          <span class="urls" *ngFor="let member of currentData.swornMembers; let last=last">
+            {{member}}{{last?'':','}}
+            <br>
+          </span>
+        </p>
+
+      </div>
+      <div class="card-footer">
+          <button type="button" class="btn btn-info" (click)="goBackFunction()">go back</button>
+      </div>
+    </div>
+  </div>
+</div>
