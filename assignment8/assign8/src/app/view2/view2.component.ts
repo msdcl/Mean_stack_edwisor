@@ -49,16 +49,16 @@ export class View2Component implements OnInit {
   public func(id: number, type: string): any {
     this.currentData = this.http.getDataForView(this.type, this.currentId).subscribe(
       data => {
-
+       console.log(data);
         this.currentData = data;
-        console.log("view2 current Data : " + this.currentData);
+       
       },
       error => {
         console.log("some error has occured.")
         console.log(error.errorMessage);
       }
     );
-
+    console.log(this.currentData);
   }
 
 

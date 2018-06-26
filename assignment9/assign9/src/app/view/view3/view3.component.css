@@ -1,0 +1,26 @@
+.card{
+    margin-top: 3%;
+    margin-left:3%;
+    border: 2px solid black;
+    margin-bottom: 2%;
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.heading{
+    text-align: center;
+    font-size:5.5vw;
+    font-family: 'EB Garamond', serif;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+    font-style:italic;
+}
+.container{
+    background-color:#FFDB58;
+}
+.paragraph{
+    padding-left: 2%;
+    font-size:20px;
+}
+

@@ -1,0 +1,30 @@
+<div class="card ">
+  <img class="card-img-top" src="{{country.flag}}" alt="Card image cap">
+  <div class="card-body">
+
+    <p class="paragraph card-text">
+      <b>Name : </b>{{country.name}}
+      <br>
+      <b>Capital : </b>{{country.capital}}
+      <br>
+      <b>NativeName : </b>{{country.nativeName}}
+      <br>
+      <b>Subregion : </b>{{country.subregion}}
+      <br>
+      <b>Currency : </b>
+      <span *ngFor="let curr of country.currencies; let last=last" >
+        <a (click)="callTheFunction('currency',curr.code)" >{{curr.name}}{{last?'':', '}}</a>
+      </span>
+      <br>
+      <b>Languages : </b>
+      <span class="array" *ngFor="let lang of country.languages; let last=last">
+        <a (click)="callTheFunction('language',lang.iso639_2)">{{lang.name}}{{last?'':', '}}</a>
+      </span>
+      <br>
+    </p>
+    <div class="card-footer">
+      <button class="btn btn-primary detail" (click)="goToCountryDetails(country.name)">details</button>
+    </div>
+
+  </div>
+  </div>

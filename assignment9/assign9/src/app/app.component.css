@@ -1,0 +1,12 @@
+.row{
+    background-color: blueviolet;
+}
+.heading{
+    font-size: 6.5vw;
+    color:white;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    font-family: 'EB Garamond', serif;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+    font-style:italic;
+}

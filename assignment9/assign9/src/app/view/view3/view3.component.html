@@ -1,0 +1,75 @@
+<div class="container">
+  <h2 class="heading">{{countryName| uppercase}}</h2>
+  <div class="row" *ngIf="country?.length>0">
+    <div class="card col-12" *ngFor="let data of country">
+       <img class="card-img-top" src="{{data.flag}}" alt="Card image cap"> 
+      <div class="card-body" >
+
+        <p class="paragraph card-text">
+          <b>Name : </b>{{data.name}}
+          <br>
+          <b>Capital : </b>{{data.capital}}
+          <br>
+          <b>NativeName : </b>{{data.nativeName}}
+          <br>
+          <b>Subregion : </b>{{data.subregion}}
+          <br>
+          <b>Region : </b>{{data.region}}
+          <br>
+          <b>Population : </b>{{data.population}}
+          <br>
+          <b>Area : </b>{{data.area}}
+          <br>
+          <b>NumericCode : </b>{{data.numericCode}}
+          <br>
+          <b>Demonym : </b>{{data.demonym}}
+          <br>
+          <b>Currency : </b>
+          <span *ngFor="let curr of data.currencies; let last=last">
+            <a (click)="callTheFunction('currency',curr.code)">{{curr.name}}{{last?'':', '}}</a>
+          </span>
+          <br>
+          <b>Languages : </b>
+          <span class="array" *ngFor="let lang of data.languages; let last=last">
+            <a (click)="callTheFunction('language',lang.iso639_2)">{{lang.name}}{{last?'':', '}}</a>
+          </span>
+          <br>
+          <b>Latitude-Longitude : </b>
+          <span *ngFor="let curr of data.latlng; let last=last">
+            {{curr}}{{last?'':', '}}
+          </span>
+          <br>
+          <b>TimeZones : </b>
+          <span *ngFor="let curr of data.timezones; let last=last">
+            {{curr}}{{last?'':', '}}
+          </span>
+          <br>
+          <b>TopLevelDomain : </b>
+          <span *ngFor="let curr of data.topLevelDomain; let last=last">
+            {{curr}}{{last?'':', '}}
+          </span><br>
+          <b>CallingCodes : </b>
+          <span *ngFor="let curr of data.callingCodes; let last=last">
+            {{curr}}{{last?'':', '}}
+          </span><br>
+          <b>Borders : </b>
+          <span *ngFor="let curr of data.borders; let last=last">
+            {{curr}}{{last?'':', '}}
+          </span><br>
+          <b>RegionalBlocs : </b>
+          <span *ngFor="let curr of data.regionalBlocs; let last=last">
+            {{curr.name}}{{last?'':', '}}
+          </span><br>
+          <b>AltSpellings : </b>
+          <span *ngFor="let curr of data.altSpellings; let last=last">
+            {{curr}}{{last?'':', '}}
+          </span><br>
+        </p>
+        <div class="card-footer">
+          <button class="btn btn-primary detail" (click)="goToBack()">go back</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

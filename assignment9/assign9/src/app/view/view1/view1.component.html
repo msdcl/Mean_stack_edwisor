@@ -1,0 +1,19 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+  <div class="row view1" > World's all regions</div>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let url of regions" >
+          <div class="card " >
+            <img class="card-img-top img-fluid" src="../../../assets/{{url.image}}" alt="Card image cap">
+            <div class="card-body">
+              
+              <button type="button" class="btn btn-primary" [routerLink]="['/view2',url.name,'#','#']" >All countries</button>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div>
+</div>
+
+  

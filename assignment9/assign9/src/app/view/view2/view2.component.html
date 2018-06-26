@@ -1,0 +1,17 @@
+
+<div class="container">
+    <div class="row">
+        <button class="btn btn-primary goBack" (click)="goToBack()">go back</button>
+      </div>
+      <div class="row">
+          <h2 *ngIf="area" class="region">{{region | uppercase}}</h2>
+          <h2 *ngIf="currency" class="region"> Filter by currency code: {{currCode | uppercase}}</h2>
+          <h2 *ngIf="language" class="region"> Filter by language code: {{langCode | uppercase}}</h2>
+        </div>
+  <div class="row">
+    <div *ngIf="allCountries?.length > 0">
+      <app-share1 class="col-md-6" *ngFor="let countryData of allCountries" [country]="countryData"></app-share1>
+    </div>
+  </div>
+</div>
+
