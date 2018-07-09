@@ -8,7 +8,40 @@ module.exports.setRouter = (app) => {
     let baseUrl = appConfig.apiVersion;
 
     // defining routes.
+     
 
+     /**
+     * @apiGroup users
+     * @apiVersion  1.0.0
+     * @api {post} /api/v1/signup api for user login.
+     *
+     * @apiParam {string} firstName firstName of the user. (body params) (required)
+     * @apiParam {string} lastName lastName of the user. (body params) (required)
+     * @apiParam {string} email email of the user. (body params) (required)
+     * @apiParam {string} password password of the user. (body params) (required)
+     * @apiParam {string} nickName nickName of the user. (body params) (required)
+     * @apiParam {string} mobileNumber mobileNumber of the user. (body params) (required)
+     *
+     * @apiSuccess {object} myResponse shows error status, message, http status code, result.
+     * 
+     * @apiSuccessExample {object} Success-Response:
+         {
+            "error": false,
+            "message": "signup Successful",
+            "status": 200,
+            "data": {
+               
+                "userDetails": {
+                "mobileNumber": 2234435524,
+                "email": "someone@mail.com",
+                "lastName": "Sengar",
+                "firstName": "Rishabh",
+                "userId": "-E9zxTYA8",
+                "nickname" : "msc"
+            }
+
+        }
+    */
 
     // params: firstName, lastName, email, mobileNumber, password
     app.post(`${baseUrl}/signup`, userController.signUpFunction);
