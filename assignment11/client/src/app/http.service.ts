@@ -11,7 +11,7 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   providedIn: 'root'
 })
 export class HttpService {
-  public baseUrl="http://localhost:3000/api/v1"
+  public baseUrl="http://localhost:3002/api/v1"
   constructor(public http:HttpClient) { }
 
   public doSignUpFunction(data):Observable<any>{

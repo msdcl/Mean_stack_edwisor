@@ -6,10 +6,10 @@ import { Component, OnChanges, Input, EventEmitter, Output, OnInit } from '@angu
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-  @Input() userFirstName: any;
-  @Input() userLastName: string;
-  @Input() userStatus: string;
-  @Input() messageRead: string;
+  @Input() userNickName: any;
+  @Input() userStatus : string='online';
+  @Input() userBg: string;
+  @Input() userColor: string;
 
   public firstChar: string;
 
@@ -17,7 +17,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-      this.firstChar = this.userFirstName[0];
+      this.firstChar = this.userNickName[0];
 
   } // end ngOnInit
 }

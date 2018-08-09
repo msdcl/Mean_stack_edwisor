@@ -1,0 +1,110 @@
+:root{
+    font-size: 20px;
+}
+.main{
+    color:whitesmoke;
+   
+    font-family: 'EB Garamond', serif;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+    font-style:italic;
+    border: 3px solid red;
+}
+.navbar-brand{
+    font-size: 35px;
+}
+input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid blue;
+}
+.list{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border: 2px solid red;
+    width:auto;
+}
+.content{
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+.icon{
+    font-size: 20px;
+    margin-left: 70%;
+    color: white;
+    cursor: pointer;
+}
+.title{
+    font-size: 1.2rem;
+    font-style: italic;
+    
+}
+.todoList{
+    overflow-y: scroll;
+    height: 65vh;
+}
+.eachList{
+    border: 1px solid black;
+    width: 100%;
+}
+/* .even{
+    background-color:  #82b74b;
+}
+.odd{
+    background-color:   #878f99;
+} */
+.container{
+    background-color: #f7cac9
+}
+.name{
+    color: white;
+    cursor: pointer;
+}
+
+.eachTaskDone{
+    background-color:#A5A5AF;
+    border: 1px solid black;
+    width: 100%;
+}
+.eachTaskIncom{
+    background-color: #57bc90;
+    border: 1px solid black;
+    width: 100%;
+}
+.collapse{
+    width:100%;
+}
+.fa-bell{
+    font-size: 30px;
+   
+}
+.extraclass{
+    -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+@keyframes glowing {
+    0% { background-color: rgb(178, 0, 9); box-shadow: 0 0 3px rgb(178, 0, 0); }
+    50% { background-color: rgb(12, 218, 12); box-shadow: 0 0 40px rgb(77, 224, 19); }
+    100% { background-color: rgb(211, 105, 6); box-shadow: 0 0 3px rgb(212, 101, 11); }
+  }
+  .bell{
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+.even{
+    background-color:  #e06377;
+}
+.odd{
+    background-color:   #878f99;
+}
+.users{
+    margin-top: 1%;
+    border:1px solid black;
+    width: 100%;
+}
+.textNotifications{
+    height: 65vh;
+    overflow-y: scroll;
+    color: white
+}

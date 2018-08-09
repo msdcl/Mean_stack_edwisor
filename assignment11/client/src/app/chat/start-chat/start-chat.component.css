@@ -3,13 +3,17 @@
     border: 3px solid black
 }
 
-.messages{
+.messages1{
     background-color: #fbf579;
     padding-left: 2%;
+    height: auto;
+    border: 2px solid black;
 }
-.currentUsers{
+.currentUsers1{
     background-color: #7dce94;
     padding-left: 3%;
+    height:80vh;
+    border: 2px solid black;
 }
 .btn{
     margin-left: 1%;
@@ -17,3 +21,26 @@
 .cursorPointer{
     cursor: pointer;
 }
+.chat-message{
+    position: relative;
+   
+}
+#message-to-send{
+    width: 55vw;
+}
+
+.messages {
+    padding: 2em 2em 1.42em;
+    border-bottom: 0.15em solid white;
+    overflow-y: scroll;
+    height: 50vh;
+  }
+  .currentUsers1{
+    padding: 2em 2em 1.42em;
+    border-bottom: 0.15em solid white;
+    overflow-y: scroll;   
+    height: 80vh;
+  }
+  .onlineUser{
+      margin-top:5px; 
+  }

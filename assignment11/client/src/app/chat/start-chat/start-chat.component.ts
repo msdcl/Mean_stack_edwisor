@@ -21,6 +21,7 @@ export class StartChatComponent implements OnInit {
   public messageList:any=[]
   public loadingPreviousChat:boolean=false;
   public pageValue:number=0
+  public scrollToChatTop:boolean=false;
 
   constructor(public socket:SocketService,public http:HttpService,
     public activatedRoute:ActivatedRoute,
@@ -28,16 +29,30 @@ export class StartChatComponent implements OnInit {
     public toastr:ToastrService,  public router:Router) { }
 
   ngOnInit() {
+    
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.currentChatRoom = params.get('name');
   });
   this.userInfo = this.http.getUserInfoFromLocalStorage();
   this.nickName = Cookie.get('nickName');
-  //this.socket.joinAChatRoom(this.nickName,this.currentChatRoom);
+ console.log("give existing users in chat room")
   this.socket.existingUsersInAChatRoom(this.currentChatRoom)
   this.allUserInParticularChatRoom()
   this.socket.chatByChatRoom(this.currentChatRoom)
- // this.getMessageFromAUser();
+
+ this.getPreviousChatWithAUser();
+ this.socket.chatByChatRoom(this.currentChatRoom)
+ .subscribe((data)=>{
+  
+   console.log("get chat as per chat room");
+   this.messageText="";
+  this.messageList.push(data);
+
+   //this.toastr.success(`${data.senderName} says : ${data.message}`)
+
+   this.scrollToChatTop=false;
+
+ });
   }
 
   public allUserInParticularChatRoom :any =()=>{
@@ -104,18 +119,7 @@ export class StartChatComponent implements OnInit {
   // }
   public pushToChatWindow2 : any =()=>{
 
-    this.socket.chatByChatRoom(this.currentChatRoom)
-    .subscribe((data)=>{
-     
-      console.log("get chat as per chat room");
-      this.messageText="";
-     this.messageList.push(data);
-
-      //this.toastr.success(`${data.senderName} says : ${data.message}`)
-
-     // this.scrollToChatTop=false;
-
-    });
+   
 
   }
 
@@ -136,6 +140,8 @@ export class StartChatComponent implements OnInit {
 // }
 
 public goToBackPage :any=()=>{
+  
+  this.socket.leaveChatRoom(this.nickName);
   this.locaton.back();
 }
 
@@ -160,7 +166,7 @@ public loadEarlierPageOfChat: any = () => {
   this.loadingPreviousChat = true;
 
   this.pageValue++;
- // this.scrollToChatTop = true;
+  this.scrollToChatTop = true;
 
   this.getPreviousChatWithAUser() 
 

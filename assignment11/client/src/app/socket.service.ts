@@ -13,12 +13,12 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   providedIn: 'root'
 })
 export class SocketService {
-  public baseUrl="http://localhost:3000";
+  public baseUrl="http://localhost:3002";
   private socket;
   constructor(public http:HttpClient) {
     this.socket = io(this.baseUrl);
    }
-
+   
    
   public verifyUser = () => {
 
@@ -133,10 +133,15 @@ export class SocketService {
 
   } // end getChatMessage
 
+  public leaveChatRoom = (nickName) => {
+    console.log("leave chat room event emit");
+  this.socket.emit('leave-chat-room',nickName);
+
+} 
 
   public exitSocket = () =>{
 
-
+   this.socket.emit("logout","");
     this.socket.disconnect();
 
 
@@ -235,7 +240,7 @@ export class SocketService {
   return Observable.create((observer) => {
 
     this.socket.on("all-users-in-paricular-chat-room", (list) => {
-     console.log("listening to all-users-in-paricular-chat-room event")
+     console.log("list of person in chat room")
       observer.next(list);
 
     }); // end Socket

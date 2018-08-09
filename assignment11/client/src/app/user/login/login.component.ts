@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
 
         },
          error => {
-          this.toastr.error("Some error has been occured",'alert!')
+          this.toastr.error("Some error has been occured????",'alert!')
 
         }
       );

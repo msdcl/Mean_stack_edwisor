@@ -6,9 +6,8 @@ import { Component, OnChanges, Input, EventEmitter, Output, OnInit } from '@angu
   styleUrls: ['./first-char.component.css']
 })
 export class FirstCharComponent implements OnInit {
-  @Input() userName: string;
-  @Input() userBg: string;
-  @Input() userColor: string;
+  @Input() roomName: string;
+  
 
   public firstChar: string;
 
@@ -17,7 +16,7 @@ export class FirstCharComponent implements OnInit {
 
   ngOnInit(): void {
 
-      this.firstChar = this.userName[0];
+      this.firstChar = this.roomName[0];
 
   } // end ngOnInit
 }

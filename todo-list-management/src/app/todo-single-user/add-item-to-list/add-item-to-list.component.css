@@ -1,0 +1,97 @@
+:root{
+    font-size: 20px;
+}
+.main{
+    color:whitesmoke;
+   
+    font-family: 'EB Garamond', serif;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+    font-style:italic;
+    border: 3px solid red;
+}
+.navbar-brand{
+    font-size: 35px;
+}
+input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid blue;
+}
+.list{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border: 2px solid red;
+    width:auto;
+}
+.content{
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+.icon{
+    font-size: 20px;
+    margin-left: 70%;
+    color: white;
+    cursor: pointer;
+}
+.title{
+    font-size: 1.2rem;
+    font-style: italic;
+    
+}
+.todoList{
+    overflow-y: scroll;
+    height: 65vh;
+}
+.eachList{
+    border: 1px solid black;
+    width: 100%;
+}
+/* .even{
+    background-color:  #82b74b;
+}
+.odd{
+    background-color:   #878f99;
+} */
+.container{
+    background-color: #f7cac9
+}
+.name{
+    color: white;
+    cursor: pointer;
+}
+
+.eachTaskDone{
+    background-color:#A5A5AF;
+    border: 1px solid black;
+    width: 100%;
+}
+.eachTaskIncom{
+    background-color: #57bc90;
+    border: 1px solid black;
+    width: 100%;
+}
+.collapse{
+    width:100%;
+}
+.subtask{
+    color:white
+}
+
+.subTaskList{
+    overflow-y: scroll;
+    height: 40vh;
+    background-color: yellow
+}
+
+.goBack .text {
+   
+    visibility:hidden;
+    }
+    
+    .goBack:hover .text {
+    visibility:visible;
+    }
+    .plus-icon{
+        cursor: pointer;
+    }
+

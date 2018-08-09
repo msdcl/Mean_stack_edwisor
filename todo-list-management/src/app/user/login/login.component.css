@@ -1,0 +1,48 @@
+.contain{
+    background-color:  #c8c3cc 
+}
+.row{
+  border: 2px solid black;
+}
+.loginForm{
+   
+    margin-top: 5%;
+    margin-bottom: 10%;
+   
+    border: 2px solid red;
+    background-color: white;
+   
+}
+.form-control{
+    width: 100%;
+}
+
+.text{
+    margin-top: 10px;
+    text-align: center;
+   font-style: italic;
+   color :black
+}
+.signup{
+    margin-top: 10px;
+    text-align: center;
+   font-style: italic;
+   color : #c83349;
+   margin-bottom: 5%;
+  
+}
+.main{
+    height:auto;
+    font-size: 6.85vw;
+    color:whitesmoke;
+    background-color: #a2836e;
+    font-family: 'EB Garamond', serif;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+    font-style:italic;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: 3px solid red;
+}
+.password{
+    cursor: pointer;
+}
