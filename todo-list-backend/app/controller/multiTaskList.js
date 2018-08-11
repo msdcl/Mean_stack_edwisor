@@ -234,21 +234,105 @@ let updateTextNotification = (req, res) => {
 
 
 let deleteMultiUserList  = (req, res) => {
-    TodoListModel.remove({ 'id': req.body.id}, (err, result) => {
-        if (err) {
-            console.log(err)
-            let apiResponse = response.generate(true, 'error in delete multi user todo list', 400, err)
-            res.send(apiResponse)
-        } else if (result == undefined || result == null || result == '') {
-            console.log('No task found')
-            let apiResponse = response.generate(true, 'No such multi user todo list found', 400, result)
-            res.send(apiResponse)
-        } else {
-            let apiResponse = response.generate(false, 'deletion successful', 200, result)
-            res.send(apiResponse)
+     
+    let getListOfSharedusers = (req, res) => {
+        return new Promise((resolve, reject) => {
+            TodoListModel.findOne({ id: req.body.id }, (err, details) => {
+                if (err) {
+                    console.log(err)
+                    logger.error('Failed To Retrieve list Data', 'multiTaskList Controller: deleteMultiUserList', 10)
+                    let apiResponse = response.generate(true, 'Failed To Find User Details from shared list', 500, null)
+                    reject(apiResponse)
+                } else if (check.isEmpty(details)) {
+                    logger.error('No such list exists', 'multiTaskList Controller: deleteMultiUserList', 10)
+                    let apiResponse = response.generate(true, 'You list exist', 500, null)
+                    reject(apiResponse)
+                } else {
 
+                    resolve(details)
+                }
+            })
+        })
+    }
+
+    let deleteIt = (listData)=>{
+        return new Promise((resolve,reject)=>{
+            TodoListModel.remove({ 'id': req.body.id}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                    let apiResponse = response.generate(true, 'error in delete multi user todo list', 400, err)
+                    reject(apiResponse)
+                } else if (result == undefined || result == null || result == '') {
+                    console.log('No task found')
+                    let apiResponse = response.generate(true, 'No such multi user todo list found', 400, result)
+                    reject(apiResponse)
+                } else {
+                    // let apiResponse = response.generate(false, 'deletion successful', 200, result)
+                    // res.send(apiResponse)
+                    let data = {
+                        listData :listData,
+                        result : result
+                    }
+                   resolve(data)
+                }
+            })
+        })
+   
+ } 
+
+ let saveTextMessages = (details) => {
+    return new Promise((resolve, reject) => {
+        let sharedWith = details.listData.sharedWith
+        for (let x in sharedWith) {
+
+            if (sock_session.sessions[sharedWith[x]] != undefined && sharedWith[x] != req.body.userId) {
+                let data = {
+                    deleteList: true,
+                    text:  `Todo list- ${details.listData.listName} has been deleted by ${req.body.userName}`,
+                    result: details.listData.listName
+                }
+                sock_session.sessions[sharedWith[x]].emit("you-have-text-notification-list-modified", data);
+            }
         }
+        for (let x = 0; x < sharedWith.length; x++) {
+
+            let newText = new TextModel({
+                id: shortid.generate(),
+                userId: sharedWith[x],
+                text: `Todo list- ${details.listData.listName} has been deleted by ${req.body.userName}`,
+                isSeen: false,
+                date:time.now()
+            })
+
+            newText.save((err, newText) => {
+                if (err) {
+
+                    console.log(err)
+                    logger.error(err.message, 'multiUserTasks:saveTextMessages', 10)
+                    let apiResponse = response.generate(true, 'Failed to add text notification', 500, null)
+                    reject(apiResponse)
+                } else {
+
+                }
+            })
+        }
+        resolve(details.result)
     })
+}
+
+getListOfSharedusers(req, res)
+        .then(deleteIt)
+        .then(saveTextMessages)
+        .then((resolve) => {
+
+            let apiResponse = response.generate(false, 'list has been deleted', 200, resolve)
+            res.send(apiResponse)
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+            
+        })
 }
 module.exports = {
     getAllTodoLists:getAllTodoLists,

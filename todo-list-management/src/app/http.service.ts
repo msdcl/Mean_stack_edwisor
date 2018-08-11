@@ -6,7 +6,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
   providedIn: 'root'
 })
 export class HttpService {
-  public baseUrl = "http://localhost:3000/api/v1"
+  public baseUrl = "http://localhost:3000"
 
   constructor(public http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class HttpService {
     const params = new HttpParams()
       .set('email', data.email)
       .set('password', data.password)
-    return this.http.post(`${this.baseUrl}/login`, params);
+    return this.http.post(`${this.baseUrl}/api/v1/login`, params);
 
   }
 
@@ -37,7 +37,7 @@ export class HttpService {
          .set('password',data.password)
          .set('mobileNumber',data.mobileNumber)
          .set('countryCode',data.countryCode)
-  return this.http.post(`${this.baseUrl}/signup`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/signup`,params);
      
   }
 
@@ -46,7 +46,7 @@ export class HttpService {
          .set('userId',data.userId)
          .set('listName',data.currList)
          .set('taskName',data.newItem)
-  return this.http.post(`${this.baseUrl}/addNewTask`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/addNewTask`,params);
      
   }
 
@@ -54,7 +54,7 @@ export class HttpService {
     const params = new HttpParams()
          .set('userId',data.userId)
          .set('listName',data.currList)
-  return this.http.post(`${this.baseUrl}/getAllTask`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/getAllTask`,params);
      
   }
 
@@ -62,7 +62,7 @@ export class HttpService {
     const params = new HttpParams()
          .set('id',data.id)
         
-  return this.http.post(`${this.baseUrl}/deleteTaskFromList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/deleteTaskFromList`,params);
      
   }
 
@@ -70,14 +70,14 @@ export class HttpService {
     const params = new HttpParams()
          .set('id',data.id)
          .set('isDone',data.isDone)
-  return this.http.post(`${this.baseUrl}/updateTaskFromList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/updateTaskFromList`,params);
      
   }
 
   public getAllTodoList(data):Observable<any>{
     const params = new HttpParams()
          .set('userId',data)
-  return this.http.post(`${this.baseUrl}/getAllTodoList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/getAllTodoList`,params);
      
   }
 
@@ -85,7 +85,7 @@ export class HttpService {
     const params = new HttpParams()
          .set('id',data.id)
         
-  return this.http.post(`${this.baseUrl}/deleteTodoList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/deleteTodoList`,params);
      
   }
 
@@ -93,7 +93,7 @@ export class HttpService {
     const params = new HttpParams()
          .set('userId',data.userId)
          .set('listName',data.name)
-  return this.http.post(`${this.baseUrl}/addNewTodoList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/addNewTodoList`,params);
      
   }
 
@@ -101,14 +101,14 @@ export class HttpService {
     const params = new HttpParams()
          .set('id',data.id)
          .set('taskName',data.taskName)
-  return this.http.post(`${this.baseUrl}/updateTaskFromList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/updateTaskFromList`,params);
      
   }
 
   public getAllSubTaskOfTask(data):Observable<any>{
     const params = new HttpParams()
          .set('parentId',data)
-  return this.http.post(`${this.baseUrl}/getAllSubTasks`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/getAllSubTasks`,params);
      
   }
 
@@ -116,7 +116,7 @@ export class HttpService {
     const params = new HttpParams()
          .set('parentId',data.parentId)
          .set('subTask',data.subTask)
-  return this.http.post(`${this.baseUrl}/addNewSubTask`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/addNewSubTask`,params);
      
   }
 
@@ -124,7 +124,7 @@ export class HttpService {
     const params = new HttpParams()
          .set('id',data.id)
         
-  return this.http.post(`${this.baseUrl}/deleteSubTask`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/deleteSubTask`,params);
      
   }
 
@@ -132,21 +132,21 @@ export class HttpService {
     const params = new HttpParams()
          .set('id',data.id)
          .set('isDone',data.isDone)
-  return this.http.post(`${this.baseUrl}/updateSubTaskStatus`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/updateSubTaskStatus`,params);
      
   }
 
   
   public getAllUsersOnPlatform():Observable<any>{
     
-  return this.http.get(`${this.baseUrl}/getAllUsers`);
+  return this.http.get(`${this.baseUrl}/api/v1/getAllUsers`);
      
   }
 
   public pendingFriendRequests(userId):Observable<any>{
     const params = new HttpParams()
          .set('userId',userId)
-  return this.http.post(`${this.baseUrl}/getAllNotification`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/getAllNotification`,params);
      
   }
 
@@ -156,7 +156,7 @@ export class HttpService {
          .set('requestedBy',data.senderId)
          .set('name',data.name)
          .set('nameBy',data.nameBy)
-  return this.http.post(`${this.baseUrl}/addNotification`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/addNotification`,params);
      
   }
 
@@ -169,14 +169,14 @@ export class HttpService {
          .set('userName',data.userName)
 
          
-  return this.http.post(`${this.baseUrl}/friendRequestAccepted`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/friendRequestAccepted`,params);
      
   }
 
   public getAllFriendsOfUser(data):Observable<any>{
     const params = new HttpParams()
          .set('userId',data)
-  return this.http.post(`${this.baseUrl}/getAllFriends`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/getAllFriends`,params);
      
   }
 
@@ -185,13 +185,13 @@ export class HttpService {
          .set('userId',data.userId)
          .set('friendId',data.friendId)
    
-  return this.http.post(`${this.baseUrl}/deleteUserFriend`,params);    
+  return this.http.post(`${this.baseUrl}/api/v1/deleteUserFriend`,params);    
   }
 
   public updateUserNotificationList(data):Observable<any>{
     const params = new HttpParams()
          .set('data',data)
-  return this.http.post(`${this.baseUrl}/updateUserNotificationList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/updateUserNotificationList`,params);
      
   }
 
@@ -203,14 +203,14 @@ export class HttpService {
     const params = new HttpParams()
          .set('userId',data.userId)
          .set('listName',data.name)
-  return this.http.post(`${this.baseUrl}/addNewMultiUserTodoList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/addNewMultiUserTodoList`,params);
      
   }
 
   public getAllMultiUserTodoList(data):Observable<any>{
     const params = new HttpParams()
          .set('userId',data)
-  return this.http.post(`${this.baseUrl}/getAllMultiUserTodoLists`,params);   
+  return this.http.post(`${this.baseUrl}/api/v1/getAllMultiUserTodoLists`,params);   
   }
 
   public shareListWithFriend(data):Observable<any>{
@@ -218,21 +218,21 @@ export class HttpService {
          .set('friendId',data.friendId)
          .set('listName',data.listName)
          .set('ownerName',data.userName)
-  return this.http.post(`${this.baseUrl}/shareTodoListWithFriend`,params);   
+  return this.http.post(`${this.baseUrl}/api/v1/shareTodoListWithFriend`,params);   
   }
   
 
   public getAllFriendToListShared(data):Observable<any>{
     const params = new HttpParams()
          .set('listName',data)
-  return this.http.post(`${this.baseUrl}/allfriendsToListShared`,params);   
+  return this.http.post(`${this.baseUrl}/api/v1/allfriendsToListShared`,params);   
   }
 
   public removeFriendFromSharedList(data):Observable<any>{
     const params = new HttpParams()
          .set('friendId',data.friendId)
          .set('listName',data.listName)
-  return this.http.post(`${this.baseUrl}/removeFriendFromSharedList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/removeFriendFromSharedList`,params);
      
   }
 
@@ -240,19 +240,20 @@ export class HttpService {
     const params = new HttpParams()
          .set('userId',data)
          .set('skip',skip)
-  return this.http.post(`${this.baseUrl}/getAllTextNotification`,params);   
+  return this.http.post(`${this.baseUrl}/api/v1/getAllTextNotification`,params);   
   }
   public updateTextNotificationForUser(data):Observable<any>{
     const params = new HttpParams()
          .set('userId',data.userId)
          .set('isSeen',data.isSeen)
-  return this.http.post(`${this.baseUrl}/updateTextNotification`,params);   
+  return this.http.post(`${this.baseUrl}/api/v1/updateTextNotification`,params);   
   }
 
   public deleteMultiUserTodoList(data):Observable<any>{
     const params = new HttpParams()
-         .set('id',data)
-  return this.http.post(`${this.baseUrl}/deleteMultiUserList`,params);   
+         .set('id',data.id)
+         .set('userName',data.userName)
+  return this.http.post(`${this.baseUrl}/api/v1/deleteMultiUserList`,params);   
   }
 
   public addNewTaskToMultiUserList(data):Observable<any>{
@@ -261,13 +262,13 @@ export class HttpService {
          .set('listName',data.currList)
          .set('taskName',data.newTask)
          .set('userName',data.userName)
-  return this.http.post(`${this.baseUrl}/addTaskToMultiUserList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/addTaskToMultiUserList`,params);
      
   }
   public getTasksOfMultiUserList(data):Observable<any>{
     const params = new HttpParams()
          .set('listName',data)
-  return this.http.post(`${this.baseUrl}/getAllTasksOfMultiUserList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/getAllTasksOfMultiUserList`,params);
      
   }
   
@@ -280,7 +281,7 @@ export class HttpService {
          .set('sharedWith',data.sharedWith)
          .set('taskName',data.taskName)
          .set('listName',data.listName)
-  return this.http.post(`${this.baseUrl}/deleteTasksOfMultiUserList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/deleteTasksOfMultiUserList`,params);
      
   }
   
@@ -295,7 +296,7 @@ export class HttpService {
          .set('userId',data.userId)
          .set('type',data.type)
          
-  return this.http.post(`${this.baseUrl}/updateTaskOfMultiUserList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/updateTaskOfMultiUserList`,params);
      
   }
    
@@ -309,13 +310,13 @@ export class HttpService {
     .set('sharedWith',data.sharedWith)
     .set('userId',data.userId)
     .set('type',data.type)
-  return this.http.post(`${this.baseUrl}/updateTaskOfMultiUserList`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/updateTaskOfMultiUserList`,params);
      
   }
   public sendForgotPasswordEmail(data):Observable<any>{
     const params = new HttpParams()
          .set('email',data)
-  return this.http.post(`${this.baseUrl}/forgotPassword`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/forgotPassword`,params);
      
   }
 
@@ -324,7 +325,7 @@ export class HttpService {
          .set('email',data.email)
          .set('code',data.code)
          .set('password',data.password)
-  return this.http.post(`${this.baseUrl}/changePassword`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/changePassword`,params);
      
   }
 }

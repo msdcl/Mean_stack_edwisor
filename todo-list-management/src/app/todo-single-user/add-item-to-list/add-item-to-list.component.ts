@@ -87,7 +87,7 @@ export class AddItemToListComponent implements OnInit {
       this.itemName = ""
       this.http.addNewTaskToList(data).subscribe((response) => { 
         if(response.error){
-          this.toastr.warning(`Error: ${response.message}`)
+          this.toastr.warning(`Error: ${response.message}`,'', { timeOut: 1000 })
         }else{
           let temp = { 'isDone':response.data.isDone, 'taskName': response.data.taskName,'id':response.data.id} ;
 
@@ -112,7 +112,7 @@ export class AddItemToListComponent implements OnInit {
       .subscribe((response) => {
 
         if(response.error==true){
-          this.toastr.error(`Error: ${response.message}`)
+          this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
         }else{
           this.listItems= [];
 
@@ -143,7 +143,7 @@ export class AddItemToListComponent implements OnInit {
     this.http.deleteTaskOfList(data).subscribe((response) => {
 
       if(response.error==true){
-        this.toastr.error(`Error: ${response.message}`)
+        this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
       }else{
         this.toastr.success(`task deleted successfully`)
         this.listItems = this.listItems.filter((item) => item.id !== taskId);
@@ -167,7 +167,7 @@ export class AddItemToListComponent implements OnInit {
     this.http.updateTaskOfList(data).subscribe((response) => {
 
       if(response.error==true){
-        this.toastr.error(`Error: ${response.message}`)
+        this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
       }else{
         let index = this.listItems.findIndex((obj => obj.id == taskId));
         this.listItems[index].isDone = true;
@@ -188,7 +188,7 @@ export class AddItemToListComponent implements OnInit {
   this.http.updateTaskOfList(data).subscribe((response) => {
 
     if(response.error==true){
-      this.toastr.error(`Error: ${response.message}`)
+      this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
     }else{
       let index = this.listItems.findIndex((obj => obj.id == taskId));
       this.listItems[index].isDone = false;
@@ -219,7 +219,7 @@ export class AddItemToListComponent implements OnInit {
   this.http.editTaskName(data).subscribe((response) => {
 
     if(response.error==true){
-      this.toastr.error(`Error: ${response.message}`)
+      this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
     }else{
       let index = this.listItems.findIndex((obj => obj.id == this.currTaskId));
       this.listItems[index].taskName = this.editedName
@@ -238,7 +238,7 @@ export class AddItemToListComponent implements OnInit {
     // alert("get all subtask")
     this.http.getAllSubTaskOfTask(parentTaskId).subscribe((response)=>{
       if(response.error){
-        this.toastr.warning(response.message);
+        this.toastr.warning(response.message,'', { timeOut: 1000 });
       }else{
          this.allSubTasks=[];
          for (let x in response.data) {
@@ -255,31 +255,33 @@ export class AddItemToListComponent implements OnInit {
 
  public addSubtask = (event)=>{
    if(event.keyCode==13){
-    if(this.subTaskName){
-      
-      let data = {
-          subTask : this.subTaskName,
-          parentId: this.parentTaskId
-      }
-      this.subTaskName = ""
-      this.http.addNewSubTaskToTask(data).subscribe((response) => { 
-        if(response.error){
-          this.toastr.warning(`Error: ${response.message}`)
-        }else{
-          let temp = { 'isDone':response.data.isDone, 'taskName': response.data.subTask,'id':response.data.id};
-          this.allSubTasks.push(temp); 
-          console.log(this.allSubTasks)
-          this.toastr.success("Sub task added !!")
-        }
-      });
-     
-    // this.socket.addItemToList(data);
-     }else{
-    this.toastr.warning("name can't be empty")
-     }
+      this.addNewSubTask()
    }
  }
-
+public addNewSubTask = ()=>{
+  if(this.subTaskName){
+      
+    let data = {
+        subTask : this.subTaskName,
+        parentId: this.parentTaskId
+    }
+    this.subTaskName = ""
+    this.http.addNewSubTaskToTask(data).subscribe((response) => { 
+      if(response.error){
+        this.toastr.warning(`Error: ${response.message}`,'', { timeOut: 1000 })
+      }else{
+        let temp = { 'isDone':response.data.isDone, 'taskName': response.data.subTask,'id':response.data.id};
+        this.allSubTasks.push(temp); 
+        console.log(this.allSubTasks)
+        this.toastr.success("Sub task added !!")
+      }
+    });
+   
+  // this.socket.addItemToList(data);
+   }else{
+  this.toastr.warning("name can't be empty")
+   }
+}
  public deleteSubTaskFromList = (taskId)=>{
   let data = {
        
@@ -289,7 +291,7 @@ export class AddItemToListComponent implements OnInit {
 this.http.deleteSubTaskOFromList(data).subscribe((response) => {
 
   if(response.error==true){
-    this.toastr.error(`Error: ${response.message}`)
+    this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
   }else{
     this.toastr.success(`sub task deleted successfully`)
     this.allSubTasks = this.allSubTasks.filter((item) => item.id !== taskId);
@@ -307,7 +309,7 @@ this.http.deleteSubTaskOFromList(data).subscribe((response) => {
 this.http.mark_unmark_SubTask(data).subscribe((response) => {
 
   if(response.error==true){
-    this.toastr.error(`Error: ${response.message}`)
+    this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
   }else{
     let index = this.allSubTasks.findIndex((obj => obj.id == taskId));
     this.allSubTasks[index].isDone = true;
@@ -328,7 +330,7 @@ this.http.mark_unmark_SubTask(data).subscribe((response) => {
 this.http.mark_unmark_SubTask(data).subscribe((response) => {
 
   if(response.error==true){
-    this.toastr.error(`Error: ${response.message}`)
+    this.toastr.error(`Error: ${response.message}`,'', { timeOut: 1000 })
   }else{
     let index = this.allSubTasks.findIndex((obj => obj.id == taskId));
     this.allSubTasks[index].isDone = false;

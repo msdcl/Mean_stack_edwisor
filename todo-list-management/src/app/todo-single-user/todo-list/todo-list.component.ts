@@ -140,7 +140,7 @@ export class TodoListComponent implements OnInit {
   }
 
   public getAllUsers = ()=>{
-    this.anyNotification=false;
+    this.getAllNotificationToUser();
     this.http.getAllUsersOnPlatform().subscribe((response)=>{
       if(response.error){
         this.toastr.error(response.message)
@@ -185,7 +185,7 @@ export class TodoListComponent implements OnInit {
           }
           else{
            this.allUsers = this.allUsers.filter((item) => item.id !== requestedTo)
-         
+           this.getAllNotificationToUser();
           }
         })
   }

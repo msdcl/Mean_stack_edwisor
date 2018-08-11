@@ -130,7 +130,7 @@ let addNewTask = (req, res) => {
         .catch((err) => {
             console.log(err);
             res.send(err);
-            //sock_session.sessions[err.data.userId].emit("newTaskCreated",err);
+            
         })
 
 

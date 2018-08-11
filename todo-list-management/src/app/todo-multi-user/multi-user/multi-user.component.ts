@@ -34,6 +34,7 @@ export class MultiUserComponent implements OnInit {
     this.getAllFriendsOfUser()
     this.newTextNotification();
     this.getAllTextNotification();
+    this.getNotificationOfListModified()
   }
 
   public createNewTodoTList = (event) => {
@@ -230,7 +231,11 @@ export class MultiUserComponent implements OnInit {
   }
 
   public deleteTodoList = (id)=>{
-    this.http.deleteMultiUserTodoList(id).subscribe((response)=>{
+    let data = {
+      id:id,
+      userName:`${this.userInfo.firstName} ${this.userInfo.lastName}`
+    }
+    this.http.deleteMultiUserTodoList(data).subscribe((response)=>{
       if(response.error){
        this.toastr.error(response.message, '', { timeOut: 500 })
       }else{
@@ -247,4 +252,36 @@ export class MultiUserComponent implements OnInit {
   public goToBackPage = ()=>{
     this.location.back()
   }
+
+  public getNotificationOfListModified = () => {
+    this.socket.newTextNotificationListModified().subscribe((response) => {
+      let temp;
+      let data = response.result;
+      console.log( response)
+      
+      if (response.add==true) {
+        console.log("add task notification")
+      
+        temp = { 'text': response.text }
+      } else if (response.delete==true) {
+       
+        temp = { 'text': response.text }
+      } else if (response.update==true) {
+     
+        temp = { 'text': response.text }
+        
+      }else if(response.deleteList==true){
+      //  console.log("?????")
+
+      this.allTodoLists = this.allTodoLists.filter((item) => item.name !== response.result)
+       temp = { 'text': response.text };
+          
+       
+      }
+      this.anyNotification = true;
+        
+      this.textNotifications.push(temp);
+    })
+  }
+
 }

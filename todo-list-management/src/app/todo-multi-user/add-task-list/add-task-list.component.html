@@ -37,6 +37,9 @@
         <label for="newListTitle" class="title">Add task </label>
         <br>
         <input type="text" class="newList input-group-lg" name="itemName" [(ngModel)]="itemName" placeholder="item" (keydown)="addNewItemToList($event)">
+        <span>
+          <i class="fa fa-plus-circle plus-icon" style="font-size:25px;" (click)="addNewTask()"></i>
+        </span>
       </div>
       <div *ngIf="allTasks?.length > 0" class="todoList" #scrollMe [scrollTop]="(scrollToTop)?0:scrollMe.scrollHeight">
         <div *ngFor="let list of allTasks; let odd=odd; let even=even;">

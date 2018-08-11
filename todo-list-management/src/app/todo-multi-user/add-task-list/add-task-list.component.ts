@@ -122,19 +122,19 @@ export class AddTaskListComponent implements OnInit {
     this.socket.newTextNotificationListModified().subscribe((response) => {
      
       let data = response.result;
-     // console.log(response);
+      console.log( response)
       let temp;
-      if (response.add) {
+      if (response.add==true) {
         console.log("add task notification")
         let temp1 = { 'id': data.id, 'taskName': data.taskName, 'isDone': data.isDone };
 
         this.allTasks.push(temp1);
-        temp = { 'text': data.text }
-      } else if (response.delete) {
+        temp = { 'text': response.text }
+      } else if (response.delete==true) {
         console.log("delete task notification")
         this.allTasks = this.allTasks.filter((item) => item.id !== response.result);
         temp = { 'text': response.text }
-      } else if (response.update) {
+      } else if (response.update==true) {
      
         temp = { 'text': response.text }
         if (data.type === "editName") {
@@ -151,6 +151,13 @@ export class AddTaskListComponent implements OnInit {
             let index = this.allTasks.findIndex((obj => obj.id == data.id));
             this.allTasks[index].isDone = false
           }
+        }
+      }
+      else if(response.deleteList==true){
+        console.log("?????")
+        temp = { 'text': response.text };
+        if(this.currentListName==response.result){
+          this.location.back();
         }
       }
       this.anyNotification = true;
