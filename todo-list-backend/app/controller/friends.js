@@ -207,7 +207,7 @@ let getPendingRequestsForUser = (req, res) => {
     let deleteEntryFromNotification  = () => {
       console.log("noti delete")
       return new Promise((resolve,reject)=>{
-        NotificationModel.remove({'id':req.body.id}, (err, result) => {
+        NotificationModel.findOneAndRemove({'id':req.body.id}, (err, result) => {
           if (err) {
               console.log(err)
               let apiResponse = response.generate(true, 'error in delete task list', 400, err)
@@ -267,7 +267,7 @@ let getPendingRequestsForUser = (req, res) => {
 }
 
 let deleteUserFriend  = (req, res) => {
-  FriendsModel.remove({
+  FriendsModel.deleteMany({
     $or: [
         { $and: [{'userId':req.body.userId}, {'friendId':req.body.friendId}] },
         { $and: [{'userId':req.body.friendId}, {'friendId':req.body.userId}] }

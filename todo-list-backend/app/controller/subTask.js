@@ -84,7 +84,7 @@ let getAllSubTaskOfTask = (req, res) => {
 }
 
 let deleteSubTaskFromList  = (req, res) => {
-    SubTaskModel.remove({ 'id': req.body.id}, (err, result) => {
+    SubTaskModel.findOneAndRemove({ 'id': req.body.id}, (err, result) => {
         if (err) {
             console.log(err)
             let apiResponse = response.generate(true, 'error in delete sub task', 400, err)

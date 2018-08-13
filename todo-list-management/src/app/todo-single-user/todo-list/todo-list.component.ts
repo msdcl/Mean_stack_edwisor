@@ -124,8 +124,10 @@ export class TodoListComponent implements OnInit {
   }
 
   public deleteTodoList = (listId)=>{
-    
-    this.http.deleteTodoList(listId).subscribe((response)=>{
+    let data = {
+      id : listId
+    }
+    this.http.deleteTodoList(data).subscribe((response)=>{
       if(response.error){
         this.toastr.error(response.message)
       }else{

@@ -257,7 +257,7 @@ let deleteMultiUserList  = (req, res) => {
 
     let deleteIt = (listData)=>{
         return new Promise((resolve,reject)=>{
-            TodoListModel.remove({ 'id': req.body.id}, (err, result) => {
+            TodoListModel.findOneAndRemove({ 'id': req.body.id}, (err, result) => {
                 if (err) {
                     console.log(err)
                     let apiResponse = response.generate(true, 'error in delete multi user todo list', 400, err)

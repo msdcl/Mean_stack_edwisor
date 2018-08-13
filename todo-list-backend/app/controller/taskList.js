@@ -93,7 +93,7 @@ let getTaskFromList = (req, res) => {
 }
 
 let deleteTaskFromList  = (req, res) => {
-    TaskModel.remove({ 'id': req.body.id}, (err, result) => {
+    TaskModel.findOneAndRemove({ 'id': req.body.id}, (err, result) => {
         if (err) {
             console.log(err)
             let apiResponse = response.generate(true, 'error in delete task list', 400, err)
@@ -210,7 +210,7 @@ let getAllTodoLists = (req, res) => {
 }
 
 let deleteTodoList  = (req, res) => {
-    TodoListModel.remove({ 'id': req.body.id}, (err, result) => {
+    TodoListModel.findOneAndRemove({ 'id': req.body.id}, (err, result) => {
         if (err) {
             console.log(err)
             let apiResponse = response.generate(true, 'error in delete todo list', 400, err)

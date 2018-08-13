@@ -195,7 +195,7 @@ let deleteTaskFromMultiUserList = (req, res) => {
     }
     let deletetask = (req, res) => {
         return new Promise((resolve, reject) => {
-            TaskModel.remove({ 'id': req.body.id }, (err, result) => {
+            TaskModel.findOneAndRemove({ 'id': req.body.id }, (err, result) => {
                 if (err) {
                     console.log(err)
                     let apiResponse = response.generate(true, 'error in delete task from multi user list', 400, err)

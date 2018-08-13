@@ -52,7 +52,7 @@ let signUpFunction = (req, res) => {
                             userId: shortid.generate(),
                             firstName: req.body.firstName,
                             lastName: req.body.lastName || '',
-                            email: req.body.email.toLowerCase(),
+                            email: req.body.email,
                             mobileNumber: req.body.mobileNumber,
                             password: passwordLib.hashpassword(req.body.password),
                             createdOn: time.now(),
