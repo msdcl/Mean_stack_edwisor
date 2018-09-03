@@ -11,8 +11,8 @@ import { HttpService } from '../../http.service';
 })
 export class LoginComponent implements OnInit {
 
-  private email;
-  private password;
+  public email;
+  public password;
   public nextClicked: boolean = false
   public userEmail
   public secureCode

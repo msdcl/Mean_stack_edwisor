@@ -29,9 +29,11 @@
     "flatpickr": "^4.5.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
+    "ng-trim-value-accessor": "^2.0.4",
     "ng2-cookies": "^1.0.12",
     "ngx-toastr": "^9.0.2",
     "rxjs": "^6.0.0",
+    "trim": "0.0.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

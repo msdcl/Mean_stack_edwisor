@@ -56,8 +56,8 @@ ul{
   animation: glowing 1500ms infinite;
 }
 @keyframes glowing {
-    0% { background-color: #2E5894; box-shadow: 0 0 3px #2E5894; }
-    100% { background-color: #FDEE00; box-shadow: 0 0 3px #FDEE00; }
+    0% { background-color: #20a8d8; box-shadow: 0 0 3px #20a8d8; }
+    100% { background-color: grey; box-shadow: 0 0 3px grey; }
   }
   .fa-bell{
     font-size: 30px;
@@ -77,20 +77,33 @@ ul{
     height:30px
 }
 .users{
-    width: 100%;
+    height: auto;
+    width:100%;
     margin-bottom: 10px;
+    padding-left: 16px;
 }
 .snooze{
- cursor: pointer;
+
  text-align: center;
  color:#20a8d8
 }
 .dismiss{
- cursor: pointer;
+ 
  text-align: center;
  color:#20a8d8
 }
-
+.snooze:hover{
+    cursor: pointer;
+    background-color: grey
+   }
+   .dismiss:hover{
+   cursor: pointer;
+   background-color: grey
+   }
+.text{
+  
+    padding-right: 2px;
+}
 @media only screen and (min-width:486px) and (max-width:768px){
     .fa-bell{
         font-size: 25px;

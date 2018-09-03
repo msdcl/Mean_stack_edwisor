@@ -5,7 +5,7 @@ import { UserSlotsComponent } from './user-slots/user-slots.component';
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+
 import { CalendarModule} from 'angular-calendar';
 
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +16,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule,
+  
     
     CalendarModule.forRoot(),
    

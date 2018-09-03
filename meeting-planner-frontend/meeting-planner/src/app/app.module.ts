@@ -11,7 +11,7 @@ import { HttpModule } from '@angular/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OnlyNumberDirective } from './only-number.directive';
-
+import { TrimValueAccessorModule } from 'ng-trim-value-accessor';
  
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { OnlyNumberDirective } from './only-number.directive';
     HttpClientModule,
     HttpModule,
     BrowserAnimationsModule,
-    
+    TrimValueAccessorModule,
   
     ToastrModule.forRoot(),
  

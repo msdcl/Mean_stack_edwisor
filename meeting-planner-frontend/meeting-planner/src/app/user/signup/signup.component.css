@@ -28,6 +28,8 @@
     font-family: 'Lobster', cursive;
     height: auto;
     width:100%;
+    background-color: #20a8d8;
+    color: white
 }
 .signIn{
     margin-top: 10px;

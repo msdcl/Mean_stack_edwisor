@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import {
- 
+
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef
@@ -65,17 +65,17 @@ export class UserSlotsComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-       
-      //  delete event.actions
-      this.currentEventId = event.id
+
+        //  delete event.actions
+        this.currentEventId = event.id
         this.handleEvent('Edited', event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-      //  this.events = this.events.filter(iEvent => iEvent !== event);
-      this.currentEventId = event.id
+        //  this.events = this.events.filter(iEvent => iEvent !== event);
+        this.currentEventId = event.id
         this.handleEvent('Deleted', event);
       }
     }
@@ -83,7 +83,7 @@ export class UserSlotsComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
- 
+
 
   activeDayIsOpen: boolean = true;
   public userId;
@@ -98,25 +98,26 @@ export class UserSlotsComponent implements OnInit {
   public loginUserId
   public isAdmin
   public notifications = []
-  public anyNotification:boolean=false
-  public isReminder:boolean=false;
-  constructor(public modal: NgbModal,public route: ActivatedRoute,public router:Router, public http:HttpService,
-   public toastr:ToastrService,public socket:SocketService) { }
-  
+  public anyNotification: boolean = false
+  public isReminder: boolean = false;
+  public notificationID   // text notification id
+  constructor(public modal: NgbModal, public route: ActivatedRoute, public router: Router, public http: HttpService,
+    public toastr: ToastrService, public socket: SocketService) { }
+
   ngOnInit() {
     this.checkStatus();
     this.loginUserId = Cookie.get('userId') // userId of user who logged in
     this.socket.setUser(this.loginUserId)
     this.userId = this.route.snapshot.paramMap.get('userId'); //particluar normal user
-    this.token=Cookie.get('authToken');
+    this.token = Cookie.get('authToken');
     this.getAllEventsOfThisMonth(new Date());
     this.userName = Cookie.get('userName'); //login
     this.userEmail = Cookie.get('normalUserEmail') // email of normal user
-    this.isAdmin = Cookie.get('isAdmin'); 
+    this.isAdmin = Cookie.get('isAdmin');
     this.getAllTextNotifications()
     this.getNotifications()
   }
- 
+
   public checkStatus: any = () => {
 
     if (Cookie.get('authToken') === undefined || Cookie.get('authToken') === '' || Cookie.get('authToken') === null) {
@@ -132,75 +133,79 @@ export class UserSlotsComponent implements OnInit {
     }
 
   }
- public getAllEventsOfThisMonth = (date)=>{
-  let  y = date.getFullYear(), m = date.getMonth();
-  let firstDay = new Date(y, m, 1);
-  let lastDay = new Date(y, m + 2, 0);
-  let monthStart = this.getEpoch(firstDay);
-  let monthEnd = this.getEpoch(lastDay);
-  let data = {
-    userId:this.userId,
-    startTime:monthStart,
-    endTime:monthEnd
-  }
- 
-  this.http.getAllEventsOfAMonth(data,this.token).subscribe((response)=>{
-     if(response.error){
-        this.toastr.error(response.message)
-     }else{
-       this.allEvents = [];
-      // console.log(response.data);
-      for(let event of response.data){
-       
-        let  start:Date=this.getDateFromEpoch( event.startTime)
-        let  end:Date=this.getDateFromEpoch(event.endTime)
-         // actions: this.actions,
-         // color:colors.blue
-         let temp1
-        if(this.isAdmin=='true'){
-        temp1 = {
-          id:event.id,
-          title: event.name,
-            start: start,
-            end: end,
-            color: colors.yellow,
-            description:event.description,
-            draggable: false,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            },
-            actions: this.actions
-        }
-      }else{
-        temp1 = {
-          id:event.id,
-          title: event.name,
-            start: start,
-            end: end,
-            color: colors.yellow,
-            description:event.description,
-            draggable: false,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            }
-        }
-      }
-        this.allEvents.push(temp1)
-      }
-    this.events =this.allEvents;
-    this.refresh.next();
-     }
-  
-  })
- }
+  public getAllEventsOfThisMonth = (date) => {
+    let y = date.getFullYear(), m = date.getMonth();
+    let firstDay = new Date(y, m, 1);
+    let lastDay = new Date(y, m + 2, 0);
+    let monthStart = this.getEpoch(firstDay);
+    let monthEnd = this.getEpoch(lastDay);
+    let data = {
+      userId: this.userId,
+      startTime: monthStart,
+      endTime: monthEnd
+    }
 
- public getDateFromEpoch =(ts)=>{
-   let myDate = new Date(ts*1000)
- 
-   return myDate;
- }
+    this.http.getAllEventsOfAMonth(data, this.token).subscribe((response) => {
+      if (response.error) {
+        this.toastr.error(response.message)
+      } else {
+        this.allEvents = [];
+        // console.log(response.data);
+        for (let event of response.data) {
+
+          let start: Date = this.getDateFromEpoch(event.startTime)
+          let end: Date = this.getDateFromEpoch(event.endTime)
+          // actions: this.actions,
+          // color:colors.blue
+          let temp1
+          if (this.isAdmin == 'true') {
+            temp1 = {
+              id: event.id,
+              title: event.name,
+              start: start,
+              end: end,
+              color: colors.yellow,
+              description: event.description,
+              admin: event.createdBy,
+              draggable: false,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+
+              actions: this.actions
+            }
+          } else {
+            temp1 = {
+              id: event.id,
+              title: event.name,
+              start: start,
+              end: end,
+              color: colors.yellow,
+              description: event.description,
+              admin: event.createdBy,
+              draggable: false,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              }
+            }
+          }
+          console.log(temp1);
+          this.allEvents.push(temp1)
+        }
+        this.events = this.allEvents;
+        this.refresh.next();
+      }
+
+    })
+  }
+
+  public getDateFromEpoch = (ts) => {
+    let myDate = new Date(ts * 1000)
+
+    return myDate;
+  }
   events: CalendarEvent[] = this.allEvents
   //   {
   //     start: subDays(startOfDay(new Date()), 1),
@@ -235,7 +240,7 @@ export class UserSlotsComponent implements OnInit {
   //   }
   // ];
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    
+
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -283,41 +288,42 @@ export class UserSlotsComponent implements OnInit {
     // this.refresh.next();
   }
 
-  public addNewEvent = ()=>{
-    if(!this.eventName){
+  public addNewEvent = () => {
+    if (!this.eventName) {
       this.toastr.warning("Please enter event name")
-    }else if(!this.startTime){
+    } else if (!this.startTime) {
       this.toastr.warning("Please enter end time")
-    }else if(!this.endTime){
+    } else if (!this.endTime) {
       this.toastr.warning("Please enter start time")
-    }else if(!this.description){
+    } else if (!this.description) {
       this.toastr.warning("Please add description")
-    }else if(this.startTime>this.endTime){
+    } else if (this.startTime > this.endTime) {
       this.toastr.warning("End time is smaller")
-    }else{
+    } else {
       let data = {
-        name:this.eventName,
-        startTime:this.getEpoch(this.startTime),
-        endTime:this.getEpoch(this.endTime),
-        description:this.description,
-        createdBy:this.userName,
-        userEmail:this.userEmail,
-        userId:this.userId
+        name: this.eventName,
+        startTime: this.getEpoch(this.startTime),
+        endTime: this.getEpoch(this.endTime),
+        description: this.description,
+        createdBy: this.userName,
+        userEmail: this.userEmail,
+        userId: this.userId
       }
 
-      this.http.addNewEvent(data,this.token).subscribe((response)=>{
-        if(response.error){
+      this.http.addNewEvent(data, this.token).subscribe((response) => {
+        if (response.error) {
           this.toastr.error(response.message)
-        }else{
+        } else {
           this.toastr.success(response.message)
           let data = response.data;
-          let temp  ={
-            id:data.id,
+          let temp = {
+            id: data.id,
             title: data.name,
             start: this.getDateFromEpoch(data.startTime),
             end: this.getDateFromEpoch(data.endTime),
             color: colors.red,
             description: data.description,
+            admin: data.createdBy,
             draggable: false,
             resizable: {
               beforeStart: true,
@@ -325,56 +331,68 @@ export class UserSlotsComponent implements OnInit {
             },
             actions: this.actions
           }
+          this.eventName = ""
+          this.startTime = ""
+          this.endTime = ""
+          this.description = ""
           this.events.push(temp);
           this.refresh.next();
         }
       })
-    
 
-  }
-  }
 
-  public deleteEvent = ()=>{
-    let data = {
-      id:this.currentEventId,
-      userEmail:this.userEmail
     }
-    this.http.deleteThisEvent(data,this.token).subscribe((response)=>{
-      if(response.error){
+  }
+
+  public deleteEvent = () => {
+    let data = {
+      id: this.currentEventId,
+      userEmail: this.userEmail
+    }
+    this.http.deleteThisEvent(data, this.token).subscribe((response) => {
+      if (response.error) {
         this.toastr.error(response.message)
-      }else{
+      } else {
         this.toastr.success("Deletion successful");
         this.events = this.events.filter(iEvent => iEvent.id !== this.currentEventId);
       }
     })
   }
 
-  public EditEvent =()=>{
-   
-    let data = {
-      name:this.eventName,
-      startTime:this.startTime,
-      endTime:this.endTime,
-      description:this.description,
-      id:this.currentEventId,
-      userEmail:this.userEmail
+  public EditEvent = () => {
+      let data1={}
+    if(!(this.isEmpty(this.eventName))){
+       data1['name']=this.eventName
     }
-    
-    this.http.editThisEvent(data,this.token).subscribe((response)=>{
-      if(response.error){
+    if(!(this.isEmpty(this.startTime))){
+      data1['startTime']= this.getEpoch(this.startTime)
+   }
+   if(!(this.isEmpty(this.endTime))){
+    data1['endTime']= this.getEpoch(this.endTime)
+ }
+ if(!(this.isEmpty(this.description))){
+  data1['description']= this.description
+}
+data1['userEmail']= this.userEmail
+data1['id']=  this.currentEventId
+   console.log(data1)
+
+    this.http.editThisEvent(data1, this.token).subscribe((response) => {
+      if (response.error) {
         this.toastr.error(response.message)
-      }else{
-       data= response.data;
-       console.log(response.data)
+      } else {
+        let data = response.data;
+        console.log(response.data)
         this.toastr.success("Event edited");
         this.events = this.events.filter(iEvent => iEvent.id !== this.currentEventId);
-        let temp ={
-          id:data.id,
+        let temp = {
+          id: data.id,
           title: data.name,
           start: this.getDateFromEpoch(data.startTime),
           end: this.getDateFromEpoch(data.endTime),
           color: colors.blue,
           description: data.description,
+          admin: data.createdBy,
           draggable: false,
           resizable: {
             beforeStart: true,
@@ -382,62 +400,69 @@ export class UserSlotsComponent implements OnInit {
           },
           actions: this.actions
         }
+        //this.allEvents.push(temp);
+        this.eventName = ""
+        this.startTime = ""
+        this.endTime = ""
+        this.description = ""
         this.events.push(temp);
         this.refresh.next();
       }
     })
   }
   public isEmpty = (value) => {
-    if (value === null || value === undefined || value.trim() === '' || value.length === 0) {
+  
+    if (value === null || value === undefined || value=== '' || value.length === 0) {
       return true
     } else {
       return false
     }
   }
 
-  public getEpoch = (time)=>{
+  public getEpoch = (time) => {
     //var currentDate = new Date();
-  
-  //  var currentTime = time.getTime();
-    
-   // var localOffset = (-1) * currentDate.getTimezoneOffset() * 60000;
-    let epoch =Math.round(time.getTime()/1000);
-    
-    return epoch;
-   }
 
-   public thisMonthEvents = ()=>{
+    //  var currentTime = time.getTime();
+
+    // var localOffset = (-1) * currentDate.getTimezoneOffset() * 60000;
+    let epoch = Math.round(time.getTime() / 1000);
+
+    return epoch;
+  }
+
+  public thisMonthEvents = () => {
 
     let date = this.viewDate;
-   this.getAllEventsOfThisMonth(date);
-   }
+    this.getAllEventsOfThisMonth(date);
+  }
 
-   public logout = ()=>{
-     this.socket.logoutUser(this.loginUserId);
-     this.http.logout(this.token).subscribe((response)=>{
-       if(response.error){
-         this.toastr.error(response.message)
-       }else{
-         Cookie.deleteAll();
-         this.router.navigate(['/login'])
-       }
-     })
-   }
+  public logout = () => {
+    this.socket.logoutUser(this.loginUserId);
+    this.http.logout(this.token).subscribe((response) => {
+      if (response.error) {
+        this.toastr.error(response.message)
+      } else {
+        Cookie.deleteAll();
+        this.router.navigate(['/login'])
+      }
+    })
+  }
 
-   public getNotifications = ()=>{
-     this.socket.newNotification().subscribe((response)=>{
-       let data = response.meetingInfo
-       this.isReminder=false;
-       console.log(data)
-       if(response.add ==true){
+  public getNotifications = () => {
+    this.socket.newNotification().subscribe((response) => {
+      let data = response.meetingInfo
+      this.isReminder = false;
+      console.log(data)
+      if (response.add == true) {
 
-        let temp  ={
-          id:data.id,
+        let temp = {
+          id: data.id,
           title: data.name,
           start: this.getDateFromEpoch(data.startTime),
           end: this.getDateFromEpoch(data.endTime),
           color: colors.red,
           description: data.description,
+          admin: data.createdBy,
           draggable: false,
           resizable: {
             beforeStart: true,
@@ -446,22 +471,23 @@ export class UserSlotsComponent implements OnInit {
         }
         this.events.push(temp);
         this.refresh.next();
-        let temp1 ={
-          text:response.text,
-          id:''
+        let temp1 = {
+          text: response.text,
+          id: ''
         }
         this.notifications.push(temp1)
 
-       }else if(response.update==true){
+      } else if (response.update == true) {
 
         this.events = this.events.filter(iEvent => iEvent.id !== data.id);
-        let temp ={
-          id:data.id,
+        let temp = {
+          id: data.id,
           title: data.name,
           start: this.getDateFromEpoch(data.startTime),
           end: this.getDateFromEpoch(data.endTime),
           color: colors.blue,
           description: data.description,
+          admin: data.createdBy,
           draggable: false,
           resizable: {
             beforeStart: true,
@@ -470,79 +496,85 @@ export class UserSlotsComponent implements OnInit {
         }
         this.events.push(temp);
         this.refresh.next();
-        let temp1 ={
-          text:response.text,
-          id:''
+        let temp1 = {
+          text: response.text,
+          id: ''
         }
         this.notifications.push(temp1)
 
-       }else if(response.delete==true){
+      } else if (response.delete == true) {
 
-       }else if(response.reminder==true){
-        let temp1 ={
-          text:response.text,
-          id:data.id
+      } else if (response.reminder == true) {
+        let temp1 = {
+          text: response.text,
+          id: data.id
         }
+        this.notificationID = data.id; // id of the event whose reminder is this
         this.notifications.push(temp1)
-        this.isReminder=true;
-       }
-       this.anyNotification = true;
-     })
-   }
+        this.isReminder = true;
+      }
+      this.anyNotification = true;
+    })
+  }
 
-   public getAllTextNotifications = ()=>{
-     this.http.getAllNotifications(this.userId,this.token).subscribe((response)=>{
-         if(response.error){
-           this.toastr.error(response.message)
-         }else{
-          for(let message of response.data){
-            let temp = {
-              text:message.text
-            }
-            if(message.isSeen==false){
-              this.anyNotification =true
-            }
-           
-            this.notifications.push(temp);
-          }
-         }
-     })
-   }
-
-   public notificationSeen = ()=>{
-     this.anyNotification = false;
-     let data = {
-       userId:this.userId,
-       isSeen:true
-     }
-     this.http.markNotificationsAsSeen(data,this.token).subscribe((response)=>{
-       if(response.error){
-         this.toastr.error(response.message);
-       }
-     })
-   }
-
-
-   public snoozeIt = (id)=>{
-     let data = {
-       id:id,
-       isSnoozed:true
-     }
-     this.http.snoozeNotification(data,this.token).subscribe((response)=>{
-       if(response.error){
-         this.toastr.error(response.message)
-       }
-     })
-   }
-   public dismissIt = (id)=>{
-    let data = {
-      id:id,
-      isDismissed:true
-    }
-    this.http.dismissNotification(data,this.token).subscribe((response)=>{
-      if(response.error){
+  public getAllTextNotifications = () => {
+    this.http.getAllNotifications(this.userId, this.token).subscribe((response) => {
+      if (response.error) {
         this.toastr.error(response.message)
+      } else {
+        for (let message of response.data) {
+          let temp = {
+            text: message.text,
+            id: ''
+          }
+          if (message.isSeen == false) {
+            this.anyNotification = true
+          }
+
+          this.notifications.push(temp);
+        }
       }
     })
-   }
+  }
+
+  public notificationSeen = () => {
+    this.anyNotification = false;
+    let data = {
+      userId: this.userId,
+      isSeen: true
+    }
+    this.http.markNotificationsAsSeen(data, this.token).subscribe((response) => {
+      if (response.error) {
+        this.toastr.error(response.message);
+      }
+    })
+  }
+
+
+  public snoozeIt = (id) => {
+    let data = {
+      id: id,
+      isSnoozed: true
+    }
+    this.http.snoozeNotification(data, this.token).subscribe((response) => {
+      if (response.error) {
+        this.toastr.error(response.message)
+      }else{
+        this.toastr.success("Notification snoozed")
+      }
+    })
+  }
+  public dismissIt = (id) => {
+    let data = {
+      id: id,
+      isDismissed: true
+    }
+    this.http.dismissNotification(data, this.token).subscribe((response) => {
+      if (response.error) {
+        this.toastr.error(response.message)
+      }else{
+        this.toastr.success("Notification dismissed")
+      }
+    })
+  }
 }
