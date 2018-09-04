@@ -45,11 +45,12 @@
             </pre>
             <form *ngIf="modalData?.action=='Edited'">
               <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Event name:</label>
-                  <input type="text" class="form-control" id="recipient-name" name="eventName" [(ngModel)]="eventName">
+                <div for="recipient-name" class="col-form-label">event name:</div>
+                  <input type="text" class="form-control" id="recipient-name" name="eventName" [(ngModel)]="eventName" placeholder="event name">
               </div>
+            
              <div class="form-group" >
-                <label for="recipient-name" class="col-form-label">start time:</label>
+              <div for="recipient-name" class="col-form-label">start time:</div>
               <input
               class="form-control"
               type="text"
@@ -62,11 +63,16 @@
               [enableTime]="true"
               dateFormat="Y-m-dTH:i"
               altFormat="F j, Y H:i"
-              placeholder="Not set">
+              placeholder="start time">
       
              </div>
              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">end time:</label>
+              <div for="recipient-name" class="col-form-label">description:</div>
+                <input type="text" class="form-control" id="recipient-name1" name="description" [(ngModel)]="description" placeholder="description">
+                            
+              </div>
+             <div class="form-group">
+                <div for="recipient-name" class="col-form-label">end time:</div>
                 <input
                 class="form-control"
                 type="text"
@@ -79,12 +85,9 @@
                 [enableTime]="true"
                 dateFormat="Y-m-dTH:i"
                 altFormat="F j, Y H:i"
-                placeholder="Not set">
+                placeholder="end time">
              </div>
-             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">description:</label>
-                <input type="text" class="form-control" id="recipient-name1" name="description" [(ngModel)]="description">
-            </div>
+            
           </form>
 
           </div>
@@ -269,18 +272,19 @@
       
       </table> -->
 
-      <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+      <div class="modal fade bd-example-modal-sm" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg" >
             <div class="modal-content">
                 <div class="modal-header">Add new event</div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Event name:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="eventName" [(ngModel)]="eventName">
+                          <div for="recipient-name" class="col-form-label">event name:</div>
+                            <input type="text" class="form-control" id="recipient-name" name="eventName" [(ngModel)]="eventName" placeholder="event name">
                         </div>
+                        
                         <div class="form-group" >
-                            <label for="recipient-name" class="col-form-label">start time:</label>
+                          <div for="recipient-name" class="col-form-label">start time:</div>
                           <input
                           class="form-control"
                           type="text"
@@ -293,11 +297,15 @@
                           [enableTime]="true"
                           dateFormat="Y-m-dTH:i"
                           altFormat="F j, Y H:i"
-                          placeholder="Not set">
+                          placeholder="start time">
                   
                          </div>
                          <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">end time:</label>
+                          <div for="recipient-name" class="col-form-label">description:</div>
+                            <input type="text" class="form-control" id="recipient-name1" name="description" [(ngModel)]="description" placeholder="description">
+                        </div>
+                         <div class="form-group">
+                          <div for="recipient-name" class="col-form-label">end time:</div>                  
                             <input
                             class="form-control"
                             type="text"
@@ -310,12 +318,9 @@
                             [enableTime]="true"
                             dateFormat="Y-m-dTH:i"
                             altFormat="F j, Y H:i"
-                            placeholder="Not set">
+                            placeholder="end time">
                          </div>
-                       <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">description:</label>
-                          <input type="text" class="form-control" id="recipient-name1" name="description" [(ngModel)]="description">
-                      </div>
+                       
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -349,9 +354,7 @@
                 </div>
               </div>
             </div>
-            <div class="load-more">
-              <button type="button" class="btn btn-info previousNoti"  >load more</button>
-            </div>
+         
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

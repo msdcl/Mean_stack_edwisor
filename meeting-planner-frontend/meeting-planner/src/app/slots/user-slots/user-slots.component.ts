@@ -136,9 +136,11 @@ export class UserSlotsComponent implements OnInit {
   public getAllEventsOfThisMonth = (date) => {
     let y = date.getFullYear(), m = date.getMonth();
     let firstDay = new Date(y, m, 1);
-    let lastDay = new Date(y, m + 2, 0);
+    let lastDay = new Date(y, m + 1, 0);
     let monthStart = this.getEpoch(firstDay);
-    let monthEnd = this.getEpoch(lastDay);
+    let monthEnd = this.getEpoch(lastDay)+ 23*60*60 +59*60;
+    // console.log(monthStart);
+    // console.log(monthEnd)
     let data = {
       userId: this.userId,
       startTime: monthStart,
@@ -191,7 +193,7 @@ export class UserSlotsComponent implements OnInit {
               }
             }
           }
-          console.log(temp1);
+         
           this.allEvents.push(temp1)
         }
         this.events = this.allEvents;
@@ -309,13 +311,15 @@ export class UserSlotsComponent implements OnInit {
         userEmail: this.userEmail,
         userId: this.userId
       }
-
+  // console.log(this.getEpoch(this.startTime))
+  // console.log(this.getEpoch(this.endTime))
       this.http.addNewEvent(data, this.token).subscribe((response) => {
         if (response.error) {
           this.toastr.error(response.message)
         } else {
           this.toastr.success(response.message)
           let data = response.data;
+        //  console.log(data)
           let temp = {
             id: data.id,
             title: data.name,
@@ -353,6 +357,7 @@ export class UserSlotsComponent implements OnInit {
       if (response.error) {
         this.toastr.error(response.message)
       } else {
+      //  console.log(response.data)
         this.toastr.success("Deletion successful");
         this.events = this.events.filter(iEvent => iEvent.id !== this.currentEventId);
       }
@@ -375,14 +380,14 @@ export class UserSlotsComponent implements OnInit {
 }
 data1['userEmail']= this.userEmail
 data1['id']=  this.currentEventId
-   console.log(data1)
+ 
 
     this.http.editThisEvent(data1, this.token).subscribe((response) => {
       if (response.error) {
         this.toastr.error(response.message)
       } else {
         let data = response.data;
-        console.log(response.data)
+      
         this.toastr.success("Event edited");
         this.events = this.events.filter(iEvent => iEvent.id !== this.currentEventId);
         let temp = {
@@ -452,7 +457,7 @@ data1['id']=  this.currentEventId
     this.socket.newNotification().subscribe((response) => {
       let data = response.meetingInfo
       this.isReminder = false;
-      console.log(data)
+      
       if (response.add == true) {
 
         let temp = {
@@ -503,7 +508,13 @@ data1['id']=  this.currentEventId
         this.notifications.push(temp1)
 
       } else if (response.delete == true) {
-
+        this.events = this.events.filter(iEvent => iEvent.id !== data.id);
+        this.refresh.next();
+        let temp1 = {
+          text: response.text,
+          id: ''
+        }
+        this.notifications.push(temp1)
       } else if (response.reminder == true) {
         let temp1 = {
           text: response.text,
@@ -525,7 +536,8 @@ data1['id']=  this.currentEventId
         for (let message of response.data) {
           let temp = {
             text: message.text,
-            id: ''
+            id: '',
+            date:message.date
           }
           if (message.isSeen == false) {
             this.anyNotification = true
@@ -552,9 +564,12 @@ data1['id']=  this.currentEventId
 
 
   public snoozeIt = (id) => {
+
+    let currTime = this.getEpoch(new Date())
     let data = {
       id: id,
-      isSnoozed: true
+      isSnoozed: true,
+      lastTime:currTime
     }
     this.http.snoozeNotification(data, this.token).subscribe((response) => {
       if (response.error) {

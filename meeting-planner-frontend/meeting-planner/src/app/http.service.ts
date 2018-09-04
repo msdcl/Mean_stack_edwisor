@@ -129,8 +129,9 @@ export class HttpService {
     const params = new HttpParams()
     .set('id',data.id)
     .set('isSnoozed',data.isSnoozed)
+    .set('lastNotification',data.lastTime)
     
-    return this.http.post(`${this.baseUrl}/api/v1/updateMeeting`,params,{
+    return this.http.post(`${this.baseUrl}/api/v1/snoozeOrDismissMeeting`,params,{
       headers: new HttpHeaders().set('authToken', token)})
   }
 
@@ -139,7 +140,7 @@ export class HttpService {
     .set('id',data.id)
     .set('isDismissed',data.isDismissed)
     
-    return this.http.post(`${this.baseUrl}/api/v1/updateMeeting`,params,{
+    return this.http.post(`${this.baseUrl}/api/v1/snoozeOrDismissMeeting`,params,{
       headers: new HttpHeaders().set('authToken', token)})
   }
 }
