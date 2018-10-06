@@ -6,8 +6,8 @@ import { Headers, RequestOptionsArgs, RequestOptions, RequestMethod} from '@angu
   providedIn: 'root'
 })
 export class HttpService {
- // public baseUrl = "http://localhost:3003"
- public baseUrl = "http://backend-meeting-planner.singhmahendra.me"
+  public baseUrl = "http://localhost:3003"
+// public baseUrl = "http://backend-meeting-planner.singhmahendra.me"
   constructor(public http:HttpClient) { }
   public doSignInFunction(data): Observable<any> {
     const params = new HttpParams()

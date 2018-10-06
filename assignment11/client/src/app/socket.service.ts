@@ -13,7 +13,8 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   providedIn: 'root'
 })
 export class SocketService {
-  public baseUrl="http://localhost:3002";
+ // public baseUrl="http://localhost:3002";
+  public baseUrl = "http://api-advance.singhmahendra.me"
   private socket;
   constructor(public http:HttpClient) {
     this.socket = io(this.baseUrl);

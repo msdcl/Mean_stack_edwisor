@@ -5,7 +5,7 @@ let getEpisodeDetail=(seasonNum,episodeNum)=>{
 
 	$.getJSON('https://s3-ap-southeast-1.amazonaws.com/edwisor-india-bucket/assignments/web03/JSS1l2/bigbangtheory.json', function(data) {
               
-
+            
            let reqData = data._embedded.episodes;
            let found =false;
            for(obj of reqData){  // iterate through json data

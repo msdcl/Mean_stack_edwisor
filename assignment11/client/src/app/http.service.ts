@@ -11,7 +11,8 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
   providedIn: 'root'
 })
 export class HttpService {
-  public baseUrl="http://localhost:3002/api/v1"
+  public baseUrl = "http://api-advance.singhmahendra.me"
+ // public baseUrl="http://localhost:3002/api/v1"
   constructor(public http:HttpClient) { }
 
   public doSignUpFunction(data):Observable<any>{
@@ -22,14 +23,14 @@ export class HttpService {
          .set('password',data.password)
          .set('mobileNumber',data.mobileNumber)
          .set('nickName',data.nickName)
-  return this.http.post(`${this.baseUrl}/signup`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/signup`,params);
      
   }
   public doSignInFunction(data):Observable<any>{
    const params = new HttpParams()
    .set('email',data.email)
    .set('password',data.password)
-    return this.http.post(`${this.baseUrl}/login`,params);
+    return this.http.post(`${this.baseUrl}/api/v1/login`,params);
       
   }
 
@@ -45,7 +46,7 @@ export class HttpService {
     const params = new HttpParams()
       .set('authToken', Cookie.get('authtoken'))
 
-    return this.http.post(`${this.baseUrl}/users/logout`, params);
+    return this.http.post(`${this.baseUrl}/api/v1/users/logout`, params);
 
   } 
 
@@ -54,12 +55,12 @@ export class HttpService {
          .set('name',data.name)
          .set('createdBy',data.createdBy)
          
-  return this.http.post(`${this.baseUrl}/chatRoom/create`,params);
+  return this.http.post(`${this.baseUrl}/api/v1/chatRoom/create`,params);
      
   }
 
   public getAllChatRooms():Observable<any>{
     
-    return this.http.get(`${this.baseUrl}/chatRoom/allChatRoom`);
+    return this.http.get(`${this.baseUrl}/api/v1/chatRoom/allChatRoom`);
   }
 }

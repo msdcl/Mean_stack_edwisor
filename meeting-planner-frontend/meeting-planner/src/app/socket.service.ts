@@ -6,8 +6,8 @@ import * as io from 'socket.io-client';
 })
 export class SocketService {
 
- // public baseUrl="http://localhost:3003";
- public baseUrl = "http://backend-meeting-planner.singhmahendra.me"
+  public baseUrl="http://localhost:3003";
+// public baseUrl = "http://backend-meeting-planner.singhmahendra.me"
   private socket;
   constructor() {
     this.socket = io(this.baseUrl);

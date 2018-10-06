@@ -1,6 +1,6 @@
 .container{
-    background-color: black;
-    border: 5px solid blue;
+    background-color: #c8ced3;
+  
 }
 .navbar{
     color: white;
@@ -13,7 +13,7 @@
     border: 3px solid white;
     margin-top: 10%;
     margin-bottom: 10%;
-    color: white;
+  
 }
 h2{
     margin-top:5%;

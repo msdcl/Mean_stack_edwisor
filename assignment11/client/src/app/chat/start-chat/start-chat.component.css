@@ -7,13 +7,13 @@
     background-color: #fbf579;
     padding-left: 2%;
     height: auto;
-    border: 2px solid black;
+   
 }
 .currentUsers1{
     background-color: #7dce94;
     padding-left: 3%;
     height:80vh;
-    border: 2px solid black;
+   
 }
 .btn{
     margin-left: 1%;
@@ -43,4 +43,8 @@
   }
   .onlineUser{
       margin-top:5px; 
+  }
+  .btn1{
+      color: white;
+      cursor: pointer;
   }
