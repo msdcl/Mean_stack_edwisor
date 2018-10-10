@@ -216,7 +216,10 @@ export class IssueViewComponent implements OnInit {
 
     let tempWatcher = [];
     tempWatcher.push({ id: this.assigneeId, name: this.assigneeName });
-    tempWatcher.push({ id: this.userId, name: this.userName });
+    if(this.userId!=this.assigneeId){
+      tempWatcher.push({ id: this.userId, name: this.userName });
+    }
+   
     console.log(this.uploadedFiles)
     let data = {
       title: this.title,

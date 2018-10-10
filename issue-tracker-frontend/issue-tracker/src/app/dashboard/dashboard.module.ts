@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { SearchViewComponent } from './search-view/search-view.component';
-import { FileSelectDirective } from 'ng2-file-upload';
+
 
 @NgModule({
   imports: [
@@ -24,6 +24,6 @@ import { FileSelectDirective } from 'ng2-file-upload';
       {path:'searchView',component:SearchViewComponent}
     ])
   ],
-  declarations: [PersonalViewComponent, IssueViewComponent, SearchViewComponent,FileSelectDirective]
+  declarations: [PersonalViewComponent, IssueViewComponent, SearchViewComponent]
 })
 export class DashboardModule { }

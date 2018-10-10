@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg  main navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg  main ">
   <div class="navbar-brand Dashboard ">
     Description
   </div>
@@ -68,7 +68,7 @@
           <input type="file" (change)="onFileSelected($event)" multiple>
         </div>
        <div *ngIf="issueView">Attachments:<br>
-          <a href="http://localhost:3004/{{attachments}}" target="_blank">{{originalName}}</a>
+          <a href="http://issue-tracking-backend.singhmahendra.me/{{attachments}}" target="_blank">{{originalName}}</a>
           </div>
         <div class="form-group">
           <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="any comment" name="comment" [(ngModel)]="comment" (keydown)="addComment($event)">

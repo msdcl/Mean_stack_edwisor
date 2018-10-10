@@ -1,12 +1,10 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef,ChangeDetectorRef } from '@angular/core';
 import { HttpService } from '../../http.service';
 import { ToastrService } from 'ngx-toastr';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Router } from '@angular/router';
 import { SocketService } from '../../socket.service';
 
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
 
 declare var $;
 @Component({
@@ -25,11 +23,13 @@ export class PersonalViewComponent implements OnInit {
 
  
 
-  constructor(public http:HttpService,public toastr:ToastrService,public router:Router,public socket:SocketService) { }
-// @ViewChild('dataTable') table;
-// dataTable:any
+  constructor(public http:HttpService,public toastr:ToastrService,public router:Router,public socket:SocketService,
+    public chRef: ChangeDetectorRef) { }
+@ViewChild('dataTable') table;
+dataTable:any
   ngOnInit() {
     this.checkStatus();
+    this.data = [];
     this.userId = Cookie.get('userId') // userId of user who logged in
     this.token = Cookie.get('authToken');
     this.userName = Cookie.get('userName'); //login
@@ -39,9 +39,8 @@ export class PersonalViewComponent implements OnInit {
     this.getAllNotificationForUser();
     this.newIssueAssignedRealTime();
     this.commentNotification();
-    // this.dataTable = $(this.table.nativeElement);
-    // this.dataTable.DataTable();
    
+     
   }
 
   
@@ -97,7 +96,9 @@ export class PersonalViewComponent implements OnInit {
           }
           this.data.push(obj)
         }
-      
+        this.chRef.detectChanges();
+        this.dataTable = $(this.table.nativeElement);
+        this.dataTable.DataTable();
     }else{
       this.toastr.error(response.message)
     }

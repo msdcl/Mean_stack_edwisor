@@ -1,14 +1,14 @@
 
-  <nav class="navbar navbar-expand-lg  main navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg  main">
     <div class="navbar-brand Dashboard ">
        Search
     </div>
-    <ul class="bell-icon">
+    <!-- <ul class="bell-icon">
       <li class="nav-item bell">
         <i class="fa fa-bell" [class.extraclass]="anyNotification" aria-hidden="true" data-toggle="modal" data-target=".bd-example-modal-lg2"
           (click)="notificationSeen()"></i>
       </li>
-    </ul>
+    </ul> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon icon" ></span>
@@ -34,7 +34,7 @@
             <input id="text" type="text" class="form-control"  [(ngModel)]="searchText" name="searchText" placeholder="serach issue" (keyup)="searchingIssue()">
           </div>
          
-      <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <!-- <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
         <thead>
         <tr>
             <th style="width: 40%">
@@ -69,12 +69,33 @@
             </td>
         </tr>
         </tfoot>
-      </table>
+      </table> -->
 
-  
+      <table #dataTable class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Reporter</th>
+                <th>Date</th>
+                <th>Status</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td (click)="showDetails(item.id)">{{item.title}}</td>
+            <td (click)="showDetails(item.id)">{{item.reporter}}</td>
+            <td (click)="showDetails(item.id)" class="small">{{item.date|date:'short'}}</td>
+            <td (click)="showDetails(item.id)" class="small status1" *ngIf="item.status=='in-progress'"><span class="span">{{item.status}}</span></td>
+            <td (click)="showDetails(item.id)" class="small status2" *ngIf="item.status=='in-test'"><span class="span2">{{item.status}}</span></td>
+            <td (click)="showDetails(item.id)" class="small status3" *ngIf="item.status=='backlog'"><span class="span3">{{item.status}}</span></td>
+            <td (click)="showDetails(item.id)" class="small status4" *ngIf="item.status=='done'"><span class="span4">{{item.status}}</span></td>
+        </tr>
+          </tbody>
+  </table>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-sm-12 col-md-10 offset-md-1">
         <button type="button" class="btn btn-primary" [routerLink]="['/reportIssue']">Report an issue</button>
     </div>
@@ -109,6 +130,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 

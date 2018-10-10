@@ -5,7 +5,8 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-  public baseUrl = "http://localhost:3004"
+ // public baseUrl = "http://localhost:3004"
+  public baseUrl = "http://issue-tracking-backend.singhmahendra.me"
   constructor(public http: HttpClient) { }
 
   public doSignInFunction(data): Observable<any> {
